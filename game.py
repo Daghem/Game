@@ -10,24 +10,50 @@ def move(w_map, emoj_player, x_player, y_player):
     while direzione not in ['w', 'a', 's', 'd']:
         print("Direzione non valida. Riprova.")
         direzione = input("Dove vuoi andare? (w, a, s, d): ")
+        
 
     match direzione:
         case 'w':
             w_map[x_player][y_player] = '🧱'
             x_player -= 1
+
+            #controllo fuori mappa
+            while controllo_fuori_dalla_mappa(w_map, x_player, y_player):
+                print("Fuori mappa. Riprova.")
+                return move(w_map, emoj_player, x_player + 1, y_player)
+            
             w_map[x_player][y_player] = emoj_player
         case 'a':
             w_map[x_player][y_player] = '🧱'
             y_player -= 1
+
+            #controllo fuori mappa
+            while controllo_fuori_dalla_mappa(w_map, x_player, y_player):
+                print("Fuori mappa. Riprova.")
+                return move(w_map, emoj_player, x_player, y_player + 1)
+            
             w_map[x_player][y_player] = emoj_player
         case 's':
             w_map[x_player][y_player] = '🧱'
             x_player += 1
+
+            #controllo fuori mappa
+            while controllo_fuori_dalla_mappa(w_map, x_player, y_player):
+                print("Fuori mappa. Riprova.")
+                return move(w_map, emoj_player, x_player - 1, y_player)
+            
             w_map[x_player][y_player] = emoj_player
         case 'd':
             w_map[x_player][y_player] = '🧱'
             y_player += 1
+
+            #controllo fuori mappa
+            while controllo_fuori_dalla_mappa(w_map, x_player, y_player):
+                print("Fuori mappa. Riprova.")
+                return move(w_map, emoj_player, x_player, y_player - 1)
+            
             w_map[x_player][y_player] = emoj_player
+            
     return w_map
 
 def display(w_map):
@@ -50,9 +76,19 @@ def trova_player(w_map):
                 pos = [i, j]
                 return pos
         
-    
+def controllo_fuori_dalla_mappa(w_map, x_player, y_player)-> bool:
+    limite_x = len(w_map)
+    limite_y = len(w_map[0])
+
+    if x_player < 0 or x_player >= limite_x:
+        return True
+    if y_player < 0 or y_player >= limite_y:
+        return True
+    return False
+
 
 def game():
+
     os.system('clear')
 
     Vittoria = True
