@@ -114,6 +114,7 @@ def game():
 
     #inizio del gioco
     while Vittoria:
+        os.system('clear')
         display(move(w_map, emoj_player, x_player, y_player))
 
         #aggiornare la posizione del giocatore
@@ -126,3 +127,4 @@ def game():
 
 
 game()
+
