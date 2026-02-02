@@ -110,11 +110,12 @@ def game():
 
     print("Benvenuto nel Gioco\n\n\nSpawn iniziale\n\n")
 
+    
     display(w_map) 
+    input("Premi invio per iniziare")
 
     #inizio del gioco
     while Vittoria:
-        os.system('clear')
         display(move(w_map, emoj_player, x_player, y_player))
 
         #aggiornare la posizione del giocatore
@@ -127,4 +128,3 @@ def game():
 
 
 game()
-
